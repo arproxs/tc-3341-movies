@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { StatusCodes } from 'http-status-codes'
 import type { Database } from '@/database'
 import { jsonRoute } from '@/utils/middleware'
 import buildRespository from './repository'
@@ -12,8 +13,7 @@ export default (db: Database) => {
     jsonRoute(async (req, res) => {
       if (typeof req.query.id !== 'string') {
         const movies = await messages.findAll()
-        res.status(200)
-        res.json(movies)
+        res.status(StatusCodes.OK).json(movies)
         return
       }
 
@@ -21,7 +21,7 @@ export default (db: Database) => {
       const ids = req.query.id!.split(',').map(Number)
       const movies = await messages.findByIds(ids)
 
-      res.status(200)
+      res.status(StatusCodes.OK)
       res.json(movies)
     })
   )
