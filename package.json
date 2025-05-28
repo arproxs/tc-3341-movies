@@ -10,6 +10,7 @@
     "dev": "tsx watch src",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "migrate:latest": "tsx src/database/migrate/bin",
+    "migrate:create": "bash -c 'touch src/database/migrations/$(date -u +\"%Y%m%dT%H%M%SZ\")-$1.ts'",
     "gen:types": "kysely-codegen --camel-case --dialect sqlite --out-file src/database/types.ts",
     "test": "vitest",
     "coverage": "vitest run --coverage"
